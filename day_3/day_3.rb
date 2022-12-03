@@ -1,29 +1,19 @@
-def bags
-  data = File.foreach('day_3_input.txt').to_a
-  data.map do |bag|
-    bag.chomp.split(//)
-  end
+alphabet = ('a'..'z').to_a + ('A'..'Z').to_a
+
+bags = File.open('day_3_input.txt').each_line.map { |line| line.chomp.chars }
+
+compartmentalized_bags = bags.map { |bag| bag.each_slice(bag.size / 2).to_a }
+
+common_letters = compartmentalized_bags.map do |compartment|
+  compartment[0] & compartment[1]
 end
 
-def split_bags(rucksack)
-  rucksack.map do |items|
-    items.each_slice(items.size / 2).to_a
-  end
+sum = 0
+
+common_letters.flatten.each do |letter|
+  sum += alphabet.find_index(letter) + 1
 end
 
-p split_bags(bags)
-
-split_bags(bags).each do | bag|
-  bag.select do |letter|
-
-  end
-end
+#part 2
 
 
-def alphabet
-  ('a'..'z').to_a.push(('A'..'Z').to_a).join.split(//)
-end
-
-# alphabet.each_with_index do |letter, index|
-#   puts "#{letter} = #{index + 1}"
-# end
