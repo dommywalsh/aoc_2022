@@ -5,6 +5,8 @@ bags = File.open('day_3_input.txt').each_line.map { |line| line.chomp.chars }
 
 compartmentalized_bags = bags.map { |bag| bag.each_slice(bag.size / 2).to_a }
 
+# p compartmentalized_bags
+
 common_letters = compartmentalized_bags.map do |compartment|
   compartment[0] & compartment[1]
 end
@@ -21,12 +23,20 @@ data = File.read('day_3_input.txt')
 
 groups = data.split.each_slice(3).to_a
 
-p groups
+array_groups = groups.map do |group|
+  group.map(&:split)
+end
 
-groups.
+charred_array = array_groups.flatten.map(&:chars)
 
-# badge = groups.each do |group|
-#   group[0] & group[1] & group[2]
-# end
+badges = charred_array.each_slice(3).to_a.map do |array|
+  array[0] & array[1] & array[2]
+end
 
-# p badge
+second_sum = 0
+
+badges.flatten.each do |badge|
+  second_sum += alphabet.find_index(badge) + 1
+end
+
+p second_sum
