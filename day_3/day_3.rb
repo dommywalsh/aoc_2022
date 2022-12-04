@@ -5,8 +5,6 @@ bags = File.open('day_3_input.txt').each_line.map { |line| line.chomp.chars }
 
 compartmentalized_bags = bags.map { |bag| bag.each_slice(bag.size / 2).to_a }
 
-# p compartmentalized_bags
-
 common_letters = compartmentalized_bags.map do |compartment|
   compartment[0] & compartment[1]
 end
